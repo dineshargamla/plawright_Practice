@@ -12,6 +12,18 @@ const { defineConfig, devices } = require('@playwright/test');
  */
 module.exports = defineConfig({
   testDir: './tests',
+  /**Max time out test can run for
+   * 1 minute = 60000 ms
+   */
+  timeout: 2 * 60 * 1000, // 2 min
+  expect: {
+    /**
+     * Maximum time expect() should wait for the condition to be met.
+     * For example in `await expect(locator).toHaveText();`
+     * it should br always less than test time out
+     */
+    timeout: 30000, // 30 sec
+  },
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -29,7 +41,8 @@ module.exports = defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    headless:false,
+    headless: false,
+    screenshot: 'only-on-failure',
   },
 
   /* Configure projects for major browsers */
@@ -77,4 +90,3 @@ module.exports = defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
-
