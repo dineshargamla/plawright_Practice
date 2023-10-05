@@ -14,6 +14,7 @@ exports.RahulAcademyPracticePage = class RahulAcademyPracticePage {
     );
     this.alertButton = page.locator('//input[@value="Alert"]');
     this.confirmButton = page.locator('//input[@value="Confirm"]');
+    this.switchNewTabButton = page.locator('//a[@id="opentab"]');
   }
   navigationToULR = async (page) => {
     //passing the baseURL from playwright.config file use section
@@ -32,6 +33,7 @@ exports.RahulAcademyPracticePage = class RahulAcademyPracticePage {
   };
 
   // Function to handle alert dialog
+  //!!For  alerts are used for information so there will be only one button saying "OK"
   handleAlertDialog = async (dialog) => {
     console.log(dialog.message());
     expect(await dialog.message()).toEqual(
@@ -77,38 +79,12 @@ exports.RahulAcademyPracticePage = class RahulAcademyPracticePage {
     await this.confirmButton.click();
   };
 
-  // Call this function when you're done with the page or the test
-
-  // clickingOnAlertButton = async (page) => {
-  //   await this.alertInputField.fill('Dinesh');
-  //   //!!For  alerts are used for information so there will be only one button saying "OK"
-  //   page.on('dialog', async (dialog) => {
-  //     expect(await dialog.message()).toEqual(
-  //       'Hello Dinesh, share this practice page and share your knowledge'
-  //     );
-  //     await dialog.accept();
-  //   });
-  //   await this.alertButton.click();
-  //   await page.waitForTimeout(3000);
-
-  //   //   await this.alertInputField.fill('Kamal');
-  //   //   // !! For confirm button we have two dialog boxes where we need accept it or dismiss it
-  //   //   page.on('dialog', async (dialog) => {
-  //   //     expect(await dialog.message()).toEqual(
-  //   //       'Hello Kamal , Are you sure you want to confirm?'
-  //   //     );
-  //   //     dialog.dismiss();
-  //   //   });
-  //   //   await this.confirmButton.click();
-  //   //   await page.waitForTimeout(3000);
-
-  //   //   await this.alertInputField.fill('Shiva');
-  //   //   page.on('dialog', async (dialog) => {
-  //   //     expect(await dialog.message()).toEqual(
-  //   //       'Hello Shiva , Are you sure you want to confirm?'
-  //   //     );
-  //   //     await dialog.accept();
-  //   //   });
-  //   //   await this.confirmButton.click();
-  // };
+  handleNewPage = async (page) => {
+    const pagePromise = page.waitForEvent('popup');
+    await this.switchNewTabButton.click();
+    const newPage = await pagePromise;
+    await newPage.waitForLoadState();
+    console.log(await newPage.title());
+    expect(newPage).toHaveURL('https://www.qaclickacademy.com/');
+  };
 };
