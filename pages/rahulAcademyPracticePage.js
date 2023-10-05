@@ -15,6 +15,7 @@ exports.RahulAcademyPracticePage = class RahulAcademyPracticePage {
     this.alertButton = page.locator('//input[@value="Alert"]');
     this.confirmButton = page.locator('//input[@value="Confirm"]');
     this.switchNewTabButton = page.locator('//a[@id="opentab"]');
+    this.switchNewWindowButton = page.locator('//button[@id="openwindow"]');
   }
   navigationToULR = async (page) => {
     //passing the baseURL from playwright.config file use section
@@ -86,5 +87,14 @@ exports.RahulAcademyPracticePage = class RahulAcademyPracticePage {
     await newPage.waitForLoadState();
     console.log(await newPage.title());
     expect(newPage).toHaveURL('https://www.qaclickacademy.com/');
+  };
+
+  handleNewWindow = async (page) => {
+    const pagePromise = page.waitForEvent('popup');
+    await this.switchNewWindowButton.click();
+    const newWindow = await pagePromise;
+    await newWindow.waitForLoadState();
+    console.log(await newWindow.title());
+    expect(newWindow).toHaveURL('http://www.qaclickacademy.com/');
   };
 };

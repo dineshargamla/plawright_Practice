@@ -17,4 +17,5 @@ test('Navigation to page ', async ({ page }) => {
   await page.goto('/AutomationPractice/'); //!! here it is navigating to "baseURL+/AutomationPractice/"
   await rahulAcademyPracticePage.clickingOnAlertButton(page);
   await rahulAcademyPracticePage.handleNewPage(page);
+  await rahulAcademyPracticePage.handleNewWindow(page);
 });
