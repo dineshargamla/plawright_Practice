@@ -1,5 +1,6 @@
 // @ts-check
 const { defineConfig, devices } = require('@playwright/test');
+require('dotenv').config();
 
 /**
  * Read environment variables from file.
@@ -15,7 +16,7 @@ module.exports = defineConfig({
   /**Max time out test can run for
    * 1 minute = 60000 ms
    */
-  timeout: 2 * 60 * 1000, // 2 min
+  timeout: 1 * 60 * 1000, // 1 min
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
@@ -36,6 +37,8 @@ module.exports = defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    //BaseURL
+    baseURL: process.env.RAHUL_ACADEMY_BASE_URL,
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
 
