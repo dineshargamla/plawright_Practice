@@ -39,6 +39,14 @@ module.exports = defineConfig({
   use: {
     //BaseURL
     baseURL: process.env.RAHUL_ACADEMY_BASE_URL,
+    baseURLAPI: process.env.GIT_HUB_UI_API_URL,
+    extraHTTPHeaders: {
+      // We set this header per GitHub guidelines.
+      Accept: 'application/vnd.github.v3+json',
+      // Add authorization token to all requests.
+      // Assuming personal access token available in the environment.
+      Authorization: `token ${process.env.API_TOKEN}`,
+    },
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
 

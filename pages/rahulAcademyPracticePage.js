@@ -3,7 +3,6 @@ const { use } = require('../playwright.config');
 exports.RahulAcademyPracticePage = class RahulAcademyPracticePage {
   constructor(page) {
     this.page = page;
-
     this.firstRadioButton = page.locator('//input[@value="radio1"]');
     this.secondRadioButton = page.locator('//input[@value="radio2"]');
     this.selectCountryInputfield = page.locator(
@@ -17,6 +16,7 @@ exports.RahulAcademyPracticePage = class RahulAcademyPracticePage {
     this.switchNewTabButton = page.locator('//a[@id="opentab"]');
     this.switchNewWindowButton = page.locator('//button[@id="openwindow"]');
   }
+
   navigationToULR = async (page) => {
     //passing the baseURL from playwright.config file use section
     await page.goto(use.baseURL);
