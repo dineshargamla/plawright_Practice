@@ -30,7 +30,7 @@ exports.RahulAcademyPracticePage = class RahulAcademyPracticePage {
     await this.secondRadioButton.check();
     await expect(this.secondRadioButton).toBeChecked();
     await page.waitForTimeout(2000);
-    await expect(this.firstRadioButton).not.toBeChecked();
+    await expect(this.firstRadioButton).toBeChecked();
   };
 
   // Function to handle alert dialog
