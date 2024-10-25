@@ -12,6 +12,8 @@ require('dotenv').config();
  * @see https://playwright.dev/docs/test-configuration
  */
 module.exports = defineConfig({
+  // globalSetup: './global-setup',
+  // globalTeardown: './global-teardown',
   testDir: './tests',
   /**Max time out test can run for
    * 1 minute = 60000 ms
@@ -39,8 +41,10 @@ module.exports = defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     //BaseURL
-    baseURL: process.env.RAHUL_ACADEMY_BASE_URL,
-    baseURLAPI: process.env.GIT_HUB_UI_API_URL,
+    // baseURL: 'https://andersen-webcp-wdev.wtsparadigm.com',
+
+    // baseURL: process.env.RAHUL_ACADEMY_BASE_URL,
+    // baseURLAPI: process.env.GIT_HUB_UI_API_URL,
     extraHTTPHeaders: {
       // We set this header per GitHub guidelines.
       Accept: 'application/vnd.github.v3+json',
@@ -53,8 +57,11 @@ module.exports = defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
+    ignoreHTTPSErrors: true,
     headless: false,
     screenshot: 'only-on-failure',
+    actionTimeout: 0,
+    storageState: './loginAuth.json',
   },
 
   /* Configure projects for major browsers */

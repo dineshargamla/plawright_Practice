@@ -1,10 +1,15 @@
 const { expect } = require('@playwright/test');
 const { use } = require('../playwright.config');
-exports.RahulAcademyPracticePage = class RahulAcademyPracticePage {
+
+let foo = 1234;
+class RahulAcademyPracticePage {
   constructor(page) {
     this.page = page;
     this.firstRadioButton = page.locator('//input[@value="radio1"]');
     this.secondRadioButton = page.locator('//input[@value="radio2"]');
+    this.secondRadioButton = (text) =>
+      page.locator(`//input[@value="${text}"]`);
+
     this.selectCountryInputfield = page.locator(
       '//input[@placeholder="Type to Select Countries"]'
     );
@@ -97,4 +102,6 @@ exports.RahulAcademyPracticePage = class RahulAcademyPracticePage {
     console.log(await newWindow.title());
     expect(newWindow).toHaveURL('http://www.qaclickacademy.com/');
   };
-};
+}
+// module.exports= RahulAcademyPracticePage/
+export { RahulAcademyPracticePage, foo };

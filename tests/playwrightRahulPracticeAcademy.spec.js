@@ -3,12 +3,16 @@ const { test, expect } = require('@playwright/test');
 
 const {
   RahulAcademyPracticePage,
+  foo,
 } = require('../pages/rahulAcademyPracticePage');
+// import RahulAcademyPracticePage from '../pages/rahulAcademyPracticePage';
 
+test.use({ storageState: './loginAuth.json' });
 test('Performing all the actions ', async ({ page }) => {
   const rahulAcademyPracticePage = new RahulAcademyPracticePage(page);
   await rahulAcademyPracticePage.navigationToULR(page);
   await rahulAcademyPracticePage.checkingRadioButtons(page);
+  console.log(foo);
 });
 
 test('Navigation to page ', async ({ page }) => {
@@ -18,4 +22,11 @@ test('Navigation to page ', async ({ page }) => {
   await rahulAcademyPracticePage.clickingOnAlertButton(page);
   await rahulAcademyPracticePage.handleNewPage(page);
   await rahulAcademyPracticePage.handleNewWindow(page);
+});
+
+test(' to page ', async ({ page }) => {
+  await page.goto('./');
+  console.log(foo);
+  await page.waitForTimeout(2000);
+  await expect(page.locator('.app_logo')).toBeVisible({ timeout: 15000 });
 });

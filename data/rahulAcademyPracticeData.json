@@ -1,3 +1,4 @@
 {
-    "baseURL": "https://rahulshettyacademy.com/AutomationPractice/"
+    "baseURL": "https://rahulshettyacademy.com/AutomationPractice/",
+    "smallwaits":"2000"
 }
